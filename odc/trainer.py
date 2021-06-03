@@ -488,9 +488,7 @@ class DAETrainer(Trainer):
 
     def set_save_dir(self):
         if self.config['dataset_type'] == 'pendulum':
-            self.save_dir = os.path.join("runs_dae", self.config["exp_name"] + get_time(time.time()))
-        elif self.config['dataset_type'] == 'flow':
-            self.save_dir = os.path.join("runs_dae_flow", self.config["exp_name"] + get_time(time.time()))
+            self.save_dir = os.path.join("runs", self.config["exp_name"] + get_time(time.time()))
 
     def create_save_dir(self):
         if not os.path.exists(self.save_dir):
