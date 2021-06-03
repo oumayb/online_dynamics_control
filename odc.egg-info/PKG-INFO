@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: odc
+Version: 0.0.1
+Summary: Online Learning and Control of Complex Dynamical Systems from Sensory Input
+Home-page: UNKNOWN
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU GENERAL PUBLIC LICENSE
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6.0
+Description-Content-Type: text/markdown
