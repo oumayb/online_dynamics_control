@@ -19,6 +19,7 @@ parser.add_argument('--measured_states', default=[], nargs='+', help='Measured s
 parser.add_argument('--online_update', type=int, default=0)
 parser.add_argument('--metric_prefix', type=str, default='')
 parser.add_argument('--exp_name', type=str, default=None)
+parser.add_argument('--data_path', type=str, default=None)
 args = parser.parse_args()
 
 args2 = dict()
@@ -50,6 +51,7 @@ def main():
             config['measured_states'] = args.measured_states
         if args.metric_prefix:
             config['metric_prefix'] = args.metric_prefix
+        config['data_path'] = args.data_path
         config['batch_size_train'] = args.batch_size_train
         config['dist'] = args.dist
         config['save'] = args.save

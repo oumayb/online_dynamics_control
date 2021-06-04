@@ -23,7 +23,12 @@ systems, see section 2.
 
 ## 1. Models
 ### 1.1 Train
-First, unzip ``datasets/pendulum_v_low_eval_64_64_bw.zip``. Then, run:
+First, unzip ``datasets/pendulum_v_low_eval_64_64_bw.zip``.
+````
+unzip pendulum_v_low_eval_64_64_bw.zip
+````
+
+ Then, run:
 ````
 conda activate odc
 cd odc
@@ -40,8 +45,8 @@ bash clean_runs.sh
 ### 1.3 Evaluate
 ````
 cd odc
-python evaluate_model.py --runs_dir odc/runs --exp_name test_run_ --eval 1 \ 
---sample_duration 300 --metric_prefix sd=300_
+python evaluate_model.py --runs_dir models/ --exp_name simple_low_eval_prox_2021_5_23_21_54 \ 
+--eval 1 --sample_duration 300 --metric_prefix sd=300_ --data_path datasets/pendulum_v_low_eval_64_64_bw
 ````
 Complete test_run_ with complete name with date
 

@@ -97,13 +97,12 @@ class PendulumDataset(torch.utils.data.Dataset):
                 self.u = json.load(f)
             n_frames = len(self.u['1'].keys())
             d = len(self.u['1']['0'])
-            self.U = torch.zeros((self.__len__(), n_frames, d), dtype=torch.double)
+            self.U = torch.zeros((len(self.u), n_frames, d), dtype=torch.double)
             for key in self.u.keys():
                 if key in self.videos_ids:
                     tensor = torch.zeros((n_frames, d), dtype=torch.double)
                     for key2 in self.u[key].keys():
                         tensor[int(key2), :] = torch.tensor(self.u[key][key2], dtype=torch.double)
-
                     self.U[int(key), :, :] = tensor
 
             if normalize:
@@ -126,7 +125,10 @@ class PendulumDataset(torch.utils.data.Dataset):
             batch['name'] = 0
 
         elif self.video_fmt == 'video':
-            video_name = self.videos_names[index]
+            if len(self.videos_names) == 1:
+                video_name = self.videos_names[0]
+            else:
+                video_name = self.videos_names[index]
             video_path = os.path.join(self.videos_path, video_name)
             if self.video_fmt == 'tensor':
                 clip = torch.load(video_path)

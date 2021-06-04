@@ -25,12 +25,6 @@ for exp_name in exp_names:
 
 
 for loss_path in tqdm(loss_paths):
-    exp_name = loss_path.split('model')[0]
-    exp_path = os.path.join(args.runs_dir_path, exp_name)
-    if not args.delete:
-        all_ckpts_path = os.path.join(exp_path, 'all_checkpoints')
-        if not os.path.isdir(all_ckpts_path):
-            os.mkdir(all_ckpts_path)
-    exp_name = loss_path.split('/')[0]
-    if os.path.exists(loss_path):
-        os.remove(loss_path)
+    loss_path_remove = os.path.join(args.runs_dir_path, loss_path)
+    if os.path.exists(loss_path_remove):
+        os.remove(loss_path_remove)
