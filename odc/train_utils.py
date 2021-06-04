@@ -1,17 +1,9 @@
 import torch.nn as nn
 
-from odc.models import CNNAE
-
 
 def get_loss(name, config=None):
     if name == "MSE":
         return mse_loss(reduction=config['loss_reduction'])
-
-
-def get_autoencoder(name, config=None):
-    if name == "CNNAE":
-        autoenc = CNNAE(config=config)
-    return autoenc
 
 
 def mse_loss(reduction):

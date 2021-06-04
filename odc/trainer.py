@@ -4,14 +4,14 @@ from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import StepLR
 
-from odc.train_utils import get_loss, get_autoencoder
+from odc.train_utils import get_loss
 import os
 
 from tqdm import tqdm
 
 import random
 os.environ["IMAGEIO_FFMPEG_EXE"] = "/usr/bin/ffmpeg"
-from odc.models import DMDAE
+from odc.models import DMDAE, CNNAE
 from odc.pendulum_dataset import PendulumDataset
 from odc.metrics import RFMetrics, DAEGradients, RecoMetrics
 import torch.nn as nn
@@ -764,3 +764,8 @@ class DAETrainer(Trainer):
             'residual'] + loss_pen
         losses['loss'] = loss
         return losses
+
+def get_autoencoder(name, config=None):
+    if name == "CNNAE":
+        autoenc = CNNAE(config=config)
+    return autoenc
