@@ -1,8 +1,9 @@
 import os
 import moviepy.editor as mp
-from mltools.utils.videoutils import blackwhite
 
 from tqdm import tqdm
+
+import numpy as np
 
 import argparse
 parser = argparse.ArgumentParser(description='Resizing')
@@ -13,6 +14,33 @@ args = parser.parse_args()
 
 SOURCE_DIR = args.source_dir
 TARGET_DIR = args.target_dir
+
+
+def blackwhite(clip, RGB = None, preserve_luminosity=True, out_channels=1):
+    """ Desaturates the picture, makes it black and white.
+    Parameter RGB allows to set weights for the different color
+    channels.
+    If RBG is 'CRT_phosphor' a special set of values is used.
+    preserve_luminosity maintains the sum of RGB to 1."""
+    if RGB is None:
+        RGB = [1,1,1]
+
+    if RGB == 'CRT_phosphor':
+        RGB = [0.2125, 0.7154, 0.0721]
+
+    R,G,B = 1.0*np.array(RGB)/ (sum(RGB) if preserve_luminosity else 1)
+
+    def fl(im):
+        im = (R*im[:,:,0] + G*im[:,:,1] + B*im[:,:,2])
+        if out_channels == 3:
+            return np.dstack(3*[im]).astype('uint8')
+        elif out_channels == 1:
+            print('ou_channels should be set to 3')
+            raise NotImplementedError
+            #return im.astype('uint8')
+            #return np.dstack([im]).astype('uint8')
+
+    return clip.fl_image(fl)
 
 if not os.path.isdir(TARGET_DIR):
     os.mkdir(TARGET_DIR)
