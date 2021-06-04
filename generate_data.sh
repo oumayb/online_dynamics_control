@@ -3,6 +3,7 @@ mkdir "datasets/cartpole_128_128/train"
 mkdir "datasets/cartpole_128_128/test"
 mkdir "datasets/cartpole_128_128/eval"
 
+conda activate pino
 
 python odc/generate_simulations_pinocchio.py --idx_start 0 --idx_end 2000 --target_dir datasets/cartpole_128_128/train/ \
 --with_cart 1 --max_initial_v 0 --min_bar_length 0.4 --max_bar_length 0.9 --lower_limit 0 --upper_limit 4 \
