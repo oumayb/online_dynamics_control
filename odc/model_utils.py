@@ -116,15 +116,6 @@ def update_shifted_matrices(Yh, Y_h, h, n, new_measures):
 
     return new_Y_h, new_Yh
 
-def build_shifted_matrices(Y, h):
-    bs, n, T = Y.shape
-    Y_h = torch.zeros((bs, h * n, T - h), dtype=torch.double, device=Y.device)
-    for i in range(h):
-        Y_h[:, i * n:(i + 1) * n, :] = Y[:, :, i:T - h + i]
-    Yh = Y[:, :, h:T]
-
-    return Y_h, Yh
-
 
 def estimate_A(X, rho, reg, max_it=10, h=2, d=0, U=None, a_dtype='double', a_method='prox', missing_states=[]):
     """
