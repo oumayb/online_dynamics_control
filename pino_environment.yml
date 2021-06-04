@@ -1,4 +1,4 @@
-name: pinotest2
+name: pino
 channels:
   - anaconda
   - conda-forge
