@@ -210,7 +210,7 @@ class DAEGradients(object):
         self.fmt = fmt
         config['ae_resume_path'] = None
         autoenc = CNNAE(config=config)
-        model = DMDAE(autoencoder=autoenc, dt=0.1, config=config)
+        model = DMDAE(autoencoder=autoenc, config=config)
         self.modules_gradients = dict()
         for name, _ in model.named_modules():
             self.modules_gradients[name] = dict()
