@@ -30,6 +30,20 @@ python odc/evaluate_model.py --runs_dir odc/runs --exp_name test_run_ --eval 1 \
 ````
 Complete test_run_ with complete name with date
 
+## Control
+This will generate Figure 7 of the supplementary material
+````
+python control.py
+````
+To generate Figure 6 from the main submission, run:
+````
+python control.py --exp_path ../../runs_dae/runs_dae/simple_l=0.6_control_sd=200_nptsA=150_2021_5_19_0_41 \ 
+--model_path ../../runs_dae/runs_dae/simple_l=0.6_control_sd=200_nptsA=150_2021_5_19_0_41/model_loss_8.262357005150989e-05.pth \ 
+--data_path ../../pendulum/datasets/pendulum_v_l=0.6_control_sd=200_a=0.167_64_64_bw \ 
+--system pendulum --video_idx 1301 --idx_init 151 --idx_final 178
+
+````
+
 
 
 # 5. Generate data
