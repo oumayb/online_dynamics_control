@@ -101,4 +101,6 @@ dependencies:
     - torch==1.8.1
     - torchvision==0.9.1
     - typing-extensions==3.10.0.0
-prefix: /gpfswork/rech/vgn/ubc18vn/miniconda3/envs/odc
+    - cvxpy-1.1.13
+    - matplotlib-3.4.2
+prefix: /anaconda3/envs/odc

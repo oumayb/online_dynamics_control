@@ -134,4 +134,4 @@ dependencies:
     - torchvision==0.9.1
     - typing-extensions==3.10.0.0
     - xvfbwrapper==0.2.9
-prefix: //anaconda3/envs/pinotest2
+prefix: /anaconda3/envs/pino
