@@ -25,7 +25,9 @@ systems, see section 2.
 ### 1.1 Train
 First, unzip ``datasets/pendulum_v_low_eval_64_64_bw.zip``.
 ````
+cd odc/datasets
 unzip pendulum_v_low_eval_64_64_bw.zip
+cd ../../
 ````
 
  Then, run:
@@ -33,7 +35,8 @@ unzip pendulum_v_low_eval_64_64_bw.zip
 conda activate odc
 cd odc
 python train.py --data_path datasets/pendulum_v_low_eval_64_64_bw --lr 1e-3 --ae_out_dim 8 --dataset_fraction 1 \
- --delayed_dmd 1 --history 2 --a_method prox --online_update 0 --exp_name test_run_
+--delayed_dmd 1 --history 2 --a_method prox --online_update 0 --exp_name test_run_
+cd ..
 ````
 Checkpoints will be saved in ``odc/runs/``
 
@@ -47,6 +50,7 @@ bash clean_runs.sh
 cd odc
 python evaluate_model.py --runs_dir models/ --exp_name simple_low_eval_prox_2021_5_23_21_54 \ 
 --eval 1 --sample_duration 300 --metric_prefix sd=300_ --data_path datasets/pendulum_v_low_eval_64_64_bw
+cd ..
 ````
 Complete test_run_ with complete name with date
 
@@ -55,6 +59,7 @@ This will generate Figure 7 of the supplementary material
 ````
 cd odc
 python control.py
+cd ..
 ````
 To generate Figure 6 from the main submission, run:
 ````
