@@ -35,6 +35,9 @@ torch.backends.cudnn.deterministic=True
 
 class Trainer:
     def __init__(self, config, gpu):
+        """
+        If not self.config['dist']: gpu is torch.device
+        """
         self.config = config
 
         self.train_dataset, self.val_dataset, self.train_sampler = None, None, None
@@ -204,10 +207,13 @@ class Trainer:
         metrics = self.create_metrics(name="Train metrics")
         gradients = self.create_gradients(name="Gradients")
         for batch_idx, batch in enumerate(tqdm(self.train_loader)):
-            batch['data'] = batch['data'].cuda(gpu)
+            #batch['data'] = batch['data'].cuda(gpu)
+            batch['data'] = batch['data'].to(gpu)
             if 'control_inputs' in batch.keys():
-                batch['control_inputs'] = batch['control_inputs'].cuda(gpu)
-            batch['label'] = batch['label'].cuda(gpu)
+                #batch['control_inputs'] = batch['control_inputs'].cuda(gpu)
+                batch['control_inputs'] = batch['control_inputs'].to(gpu)
+            #batch['label'] = batch['label'].cuda(gpu)
+            batch['label'] = batch['label'].to(gpu)
             output = self.forward_model(batch)
             self.optimiser.zero_grad()
             batch['label'] = batch['label']
@@ -273,11 +279,14 @@ class Trainer:
     def test_epoch(self, epoch, gpu):
         metrics = self.create_metrics(name="Val metrics")
         for batch_idx, batch in enumerate(tqdm(self.val_loader)):
-            batch['data'] = batch['data'].cuda(gpu)
+            #batch['data'] = batch['data'].cuda(gpu)
+            batch['data'] = batch['data'].to(gpu)
             if 'control_inputs' in batch.keys():
-                batch['control_inputs'] = batch['control_inputs'].cuda(gpu)
-            batch['label'] = batch['label'].cuda(gpu)
-            batch['label'] = batch['label']
+                #batch['control_inputs'] = batch['control_inputs'].cuda(gpu)
+                batch['control_inputs'] = batch['control_inputs'].to(gpu)
+            #batch['label'] = batch['label'].cuda(gpu)
+            batch['label'] = batch['label'].to(gpu)
+            #batch['label'] = batch['label']
             output = self.forward_model(batch)
             self.optimiser.zero_grad()
             losses = self.forward_loss(batch, output, epoch=epoch)
@@ -351,7 +360,8 @@ class Trainer:
                                                                                num_replicas=args["world_size"],
                                                                                rank=args["rank"])
         else:
-            self.model.cuda(gpu)
+            self.model.to(gpu)
+            #self.model.cuda(gpu)
             batch_size = self.config["batch_size_train"]
 
         self.train_loader = torch.utils.data.DataLoader(dataset=self.train_dataset, batch_size=batch_size,
@@ -408,7 +418,8 @@ class Trainer:
                                                                                         num_replicas=args["world_size"],
                                                                                         rank=args["rank"])
         elif self.config['dist'] == 0 and self.config['gpu']:
-            self.model.cuda(gpu)
+            #self.model.cuda(gpu)
+            self.model.to(gpu)
             batch_size = self.config["batch_size_train"]
 
         elif (self.config['dist'] == 0) and (self.config['gpu'] == 0):
@@ -428,11 +439,14 @@ class Trainer:
         metrics = self.create_eval_metrics(name="Evaluation metrics", config=self.config)
         self.model.eval()
         for batch_idx, batch in enumerate(tqdm(self.val_loader)):
-            batch['data'] = batch['data'].cuda(gpu)
+            #batch['data'] = batch['data'].cuda(gpu)
+            batch['data'] = batch['data'].to(gpu)
             if 'control_inputs' in batch.keys():
-                batch['control_inputs'] = batch['control_inputs'].cuda(gpu)
+                #batch['control_inputs'] = batch['control_inputs'].cuda(gpu)
+                batch['control_inputs'] = batch['control_inputs'].to(gpu)
             if self.config['gpu']:
-                batch['data'] = batch['data'].cuda(gpu)
+                #batch['data'] = batch['data'].cuda(gpu)
+                batch['data'] = batch['data'].to(gpu)
             output = self.forward_model(batch)
             metrics.update(pred=output, targets=batch['data'], n=batch['data'].size(0), batch=batch)
         metrics.print()

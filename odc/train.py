@@ -44,12 +44,11 @@ parser.add_argument('--lam_prox', default=1e6, type=float,
                     help='1/lam_prox is used for iterative refinement, if a_method is prox')
 parser.add_argument('--reg', default=1e-8, type=float, help='Regularization coeff for A when a_method==lagrangian')
 
-parser.add_argument('--gpu', default=1, type=int)
+#parser.add_argument('--gpu', default=1, type=int)
 parser.add_argument('--dist', default=0, type=int, help='Whether or not to multi-gpu')
 parser.add_argument('--pin_memory', default=1, type=int)
 parser.add_argument('--num_workers', default=10, type=int)
 parser.add_argument('--save_weights', type=int, default=0)
-
 parser.add_argument('--optim', default='adam', type=str)
 parser.add_argument('--momentum', default=0.9, type=float)
 parser.add_argument('--dampening', default=0.9, type=float)
@@ -138,6 +137,8 @@ def main():
         args2["world_size"] = ngpus_per_node * args2["world_size"]
         mp.spawn(fn=init, nprocs=ngpus_per_node, args=(ngpus_per_node, args2), join=True)
     else:
-        init(gpu=0)
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        init(gpu=device)
+        #init(gpu=args.device)
 if __name__ == '__main__':
     main()
