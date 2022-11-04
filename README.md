@@ -26,7 +26,8 @@ systems, see section 2.
 
 ## 1. Models
 ### 1.1 Train
-First, unzip ``datasets/pendulum_v_low_eval_64_64_bw.zip``.
+
+First, download ``pendulum_v_low_eval_64_64_bw.zip`` from https://mybox.inria.fr/f/27c2413966a844ea8506/?dl=1, move it to the ``datasets`` folder, and unzip it:
 ````
 cd odc/datasets
 unzip pendulum_v_low_eval_64_64_bw.zip
