@@ -28,7 +28,7 @@ To generate more systems, see section 2.
 ## 1. Models
 ### 1.1 Train
 
-First, make sure your dataset folder (the folder containing train and test folders) are in the ``datasets`` folder.
+First, make sure your dataset folder (the folder containing train and test folders) is in the ``datasets`` folder.
 
 Then, run:
 ````
