@@ -19,22 +19,18 @@ conda activate odc
 pip install -e .
 ````
 
-A pendulum dataset is provided as a zip file in ``odc/datasets/pendulum_v_low_eval_64_64_bw.zip``. To generate more 
-systems, see section 2.
+An unactuated pendulum dataset can be downloaded from: https://mybox.inria.fr/f/27c2413966a844ea8506/?dl=1 .  
+An actuated pendulum dataset can be downloaded from: https://mybox.inria.fr/f/564ebf586a8c45148202/?dl=1 .  
+To generate more systems, see section 2.
 
 
 
 ## 1. Models
 ### 1.1 Train
 
-First, download ``pendulum_v_low_eval_64_64_bw.zip`` from https://mybox.inria.fr/f/27c2413966a844ea8506/?dl=1, move it to the ``datasets`` folder, and unzip it:
-````
-cd odc/datasets
-unzip pendulum_v_low_eval_64_64_bw.zip
-cd ../../
-````
+First, make sure your dataset folder (the folder containing train and test folders) are in the ``datasets`` folder.
 
- Then, run:
+Then, run:
 ````
 conda activate odc
 cd odc
