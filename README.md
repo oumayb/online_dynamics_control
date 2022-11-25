@@ -1,3 +1,6 @@
+ ## Code for paper [Online Learning and Control of Dynamical Systems from Sensory Input (NeurIPS 2021)](https://proceedings.neurips.cc/paper/2021/hash/ea6979872125d5acbac6068f186a0359-Abstract.html) 
+
+
 # Files
 The ```figures``` folder contains subfolders named after figures from the main submission and from the supplementary 
 material. Each subfolder from ``fig1`` to ``fig5`` contains one GT video sequence, and predicted video sequences with 
@@ -23,7 +26,8 @@ systems, see section 2.
 
 ## 1. Models
 ### 1.1 Train
-First, unzip ``datasets/pendulum_v_low_eval_64_64_bw.zip``.
+
+First, download ``pendulum_v_low_eval_64_64_bw.zip`` from https://mybox.inria.fr/f/27c2413966a844ea8506/?dl=1, move it to the ``datasets`` folder, and unzip it:
 ````
 cd odc/datasets
 unzip pendulum_v_low_eval_64_64_bw.zip
